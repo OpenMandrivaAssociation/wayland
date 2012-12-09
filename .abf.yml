@@ -1,2 +1,4 @@
+---
 sources:
-  "wayland-0.1.20110917.tar.xz:"	71e224db91e2ef5258051b54404c4192089fb962
+  wayland-0.95.0.tar.xz: 4a7e49256f3d4a61add3cf70d74f02abb5b243a2
+  wayland-1.0.0.tar.xz: c8f39b099d9a5c6c5609046a31ef371655eb2c05
