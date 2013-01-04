@@ -1,7 +1,3 @@
-%define name wayland
-%define version 1.0.0
-%define release %mkrel 1
-
 %define client_major 0
 %define server_major 0
 %define cursor_major 0
@@ -18,10 +14,10 @@
 %define cursor_libname %mklibname %{cursor_name} %{cursor_major}
 
 Summary:	Wayland Compositor Infrastructure
-Name:		%{name}
-Version:	%{version}
-Release:	%{release}
-Source0:	%{name}-%{version}.tar.xz
+Name:		wayland
+Version:	1.0.3
+Release:	1
+Source0:	http://wayland.freedesktop.org/releases/%{name}-%{version}.tar.xz
 License:	MIT
 Group:		System/Libraries
 Url:		http://wayland.freedesktop.org/
@@ -30,6 +26,13 @@ BuildRequires:	pkgconfig(libffi)
 # for protocol doc
 BuildRequires:	xsltproc
 BuildRequires:	doxygen
+
+%track
+prog %name = {
+	url = http://wayland.freedesktop.org/releases.html
+	version = %version
+	regex = %name-(__VER__)\.tar\.xz
+}
 
 %description
 Wayland is a protocol for a compositor to talk to its clients as well
@@ -122,5 +125,4 @@ rm -f %{buildroot}%{_libdir}/*.la
 %{_bindir}/%{name}-scanner
 
 %files doc
-%doc %{_docdir}/%{name}/*
 %{_mandir}/man3/wl_*.3*
