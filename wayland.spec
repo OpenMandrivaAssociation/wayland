@@ -25,6 +25,8 @@ BuildRequires:	expat-devel
 BuildRequires:	pkgconfig(libffi)
 # for protocol doc
 BuildRequires:	xsltproc
+# for man pages
+BuildRequires:	docbook-style-xsl
 BuildRequires:	doxygen
 
 %track
