@@ -15,7 +15,7 @@
 
 Summary:	Wayland Compositor Infrastructure
 Name:		wayland
-Version:	1.0.3
+Version:	1.1.0
 Release:	1
 Source0:	http://wayland.freedesktop.org/releases/%{name}-%{version}.tar.xz
 License:	MIT
