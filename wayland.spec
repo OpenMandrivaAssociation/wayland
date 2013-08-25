@@ -15,7 +15,7 @@
 
 Summary:	Wayland Compositor Infrastructure
 Name:		wayland
-Version:	1.2.0
+Version:	1.2.1
 Release:	1
 License:	MIT
 Group:		System/Libraries
