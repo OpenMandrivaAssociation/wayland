@@ -94,10 +94,10 @@ This package contains documentation of %{name}.
 
 %prep
 %setup -q
+autoreconf -vfi
 
 %build
-autoreconf -vfi
-%configure2_5x --disable-static
+%configure2_5x
 %make
 
 %install
