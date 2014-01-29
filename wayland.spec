@@ -15,8 +15,8 @@
 
 Summary:	Wayland Compositor Infrastructure
 Name:		wayland
-Version:	1.2.1
-Release:	5
+Version:	1.4.0
+Release:	1
 License:	MIT
 Group:		System/Libraries
 Url:		http://wayland.freedesktop.org/
@@ -117,7 +117,10 @@ autoreconf -vfi
 %{_libdir}/lib%{name}*.so
 %{_libdir}/pkgconfig/%{name}*.pc
 %{_datadir}/pkgconfig/%{name}*.pc
+%dir %{_datadir}/wayland/
 %{_datadir}/wayland/wayland-scanner.mk
+%{_datadir}/wayland/wayland.dtd
+%{_datadir}/wayland/wayland.xml
 %{_datadir}/aclocal/%{name}-scanner.m4
 
 %files tools
