@@ -21,13 +21,13 @@ License:	MIT
 Group:		System/Libraries
 Url:		http://wayland.freedesktop.org/
 Source0:	http://wayland.freedesktop.org/releases/%{name}-%{version}.tar.xz
-BuildRequires:	expat-devel
-BuildRequires:	pkgconfig(libffi)
-# for protocol doc
-BuildRequires:	xsltproc
 # for man pages
 BuildRequires:	docbook-style-xsl
 BuildRequires:	doxygen
+# for protocol doc
+BuildRequires:	xsltproc
+BuildRequires:	pkgconfig(expat)
+BuildRequires:	pkgconfig(libffi)
 
 %track
 prog %{name} = {
@@ -97,7 +97,7 @@ This package contains documentation of %{name}.
 autoreconf -vfi
 
 %build
-%configure2_5x
+%configure2_5x --disable-static
 %make
 
 %install
@@ -128,3 +128,4 @@ autoreconf -vfi
 
 %files doc
 %{_mandir}/man3/wl_*.3*
+
