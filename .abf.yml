@@ -1,5 +1,2 @@
-removed_sources:
-  wayland-1.1.0.tar.xz: 70cb0517d4a200b46572f868846e42162011ee87
-  wayland-1.2.0.tar.xz: 14e2b4d80b01c5763cc10264e75f71f045f34594
 sources:
-  wayland-1.2.1.tar.xz: 2214b690cb5a4f9695d287f27730c4368e6ef829
+  wayland-1.5.0.tar.xz: bace08b4a531ea4b80b4cf4e953320bc48ed7efe
