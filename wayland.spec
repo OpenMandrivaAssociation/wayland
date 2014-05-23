@@ -116,7 +116,6 @@ autoreconf -vfi
 %{_includedir}/%{name}-*.h
 %{_libdir}/lib%{name}*.so
 %{_libdir}/pkgconfig/%{name}*.pc
-%{_datadir}/pkgconfig/%{name}*.pc
 %dir %{_datadir}/wayland/
 %{_datadir}/wayland/wayland-scanner.mk
 %{_datadir}/wayland/wayland.dtd
