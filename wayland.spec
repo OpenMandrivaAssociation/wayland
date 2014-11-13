@@ -16,7 +16,7 @@
 Summary:	Wayland Compositor Infrastructure
 Name:		wayland
 Version:	1.6.0
-Release:	1
+Release:	2
 License:	MIT
 Group:		System/Libraries
 Url:		http://wayland.freedesktop.org/
@@ -97,7 +97,7 @@ This package contains documentation of %{name}.
 autoreconf -vfi
 
 %build
-%configure2_5x --disable-static
+%configure --disable-static
 %make
 
 %install
