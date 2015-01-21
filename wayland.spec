@@ -15,8 +15,8 @@
 
 Summary:	Wayland Compositor Infrastructure
 Name:		wayland
-Version:	1.6.0
-Release:	3
+Version:	1.6.91
+Release:	1
 License:	MIT
 Group:		System/Libraries
 Url:		http://wayland.freedesktop.org/
@@ -26,6 +26,7 @@ BuildRequires:	docbook-style-xsl
 BuildRequires:	doxygen
 # for protocol doc
 BuildRequires:	xsltproc
+BuildRequires:	xmlto
 BuildRequires:	pkgconfig(expat)
 BuildRequires:	pkgconfig(libffi)
 
@@ -127,4 +128,5 @@ autoreconf -vfi
 
 %files doc
 %{_mandir}/man3/wl_*.3*
+%{_docdir}/%{name}/
 
