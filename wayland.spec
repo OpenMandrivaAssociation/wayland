@@ -15,7 +15,7 @@
 
 Summary:	Wayland Compositor Infrastructure
 Name:		wayland
-Version:	1.6.91
+Version:	1.7.0
 Release:	1
 License:	MIT
 Group:		System/Libraries
@@ -129,4 +129,3 @@ autoreconf -vfi
 %files doc
 %{_mandir}/man3/wl_*.3*
 %{_docdir}/%{name}/
-
