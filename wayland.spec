@@ -98,7 +98,9 @@ This package contains documentation of %{name}.
 autoreconf -vfi
 
 %build
-%configure --disable-static
+%configure \
+	--disable-static \
+	--disable-documentation
 %make
 
 %install
