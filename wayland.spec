@@ -29,6 +29,7 @@ BuildRequires:	xsltproc
 BuildRequires:	xmlto
 BuildRequires:	pkgconfig(expat)
 BuildRequires:	pkgconfig(libffi)
+BuildRequires:	pkgconfig(libxdot)
 
 %track
 prog %{name} = {
@@ -99,8 +100,8 @@ autoreconf -vfi
 
 %build
 %configure \
-	--disable-static \
-	--disable-documentation
+	--disable-static
+
 %make
 
 %install
