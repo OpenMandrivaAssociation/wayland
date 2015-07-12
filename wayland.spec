@@ -15,16 +15,15 @@
 
 Summary:	Wayland Compositor Infrastructure
 Name:		wayland
-Version:	1.7.0
+Version:	1.8.1
 Release:	1
 License:	MIT
 Group:		System/Libraries
 Url:		http://wayland.freedesktop.org/
 Source0:	http://wayland.freedesktop.org/releases/%{name}-%{version}.tar.xz
-# for man pages
+
 BuildRequires:	docbook-style-xsl
 BuildRequires:	doxygen
-# for protocol doc
 BuildRequires:	xsltproc
 BuildRequires:	xmlto
 BuildRequires:	pkgconfig(expat)
@@ -49,15 +48,27 @@ fullscreen) or other display servers.
 %package -n %{devname}
 Summary:	Header files for %{name}
 Group:		Development/C
-Provides:	%{name}-devel = %{version}-%{release}
-Requires:	%{client_libname} = %{version}-%{release}
-Requires:	%{server_libname} = %{version}-%{release}
-Requires:	%{cursor_libname} = %{version}-%{release}
-Requires:	%{name}-tools = %{version}-%{release}
+Provides:	%{name}-devel = %{EVRD}
+Requires:	%{client_libname} = %{EVRD}
+Requires:	%{server_libname} = %{EVRD}
+Requires:	%{cursor_libname} = %{EVRD}
+Requires:	%{name}-tools = %{EVRD}
 
 %description -n %{devname}
 This package contains the header and pkg-config files for developing
 with %{name}.
+
+%files -n %{devname}
+%doc COPYING README TODO
+%{_includedir}/%{name}-*.h
+%{_libdir}/lib%{name}*.so
+%{_libdir}/pkgconfig/%{name}*.pc
+%dir %{_datadir}/wayland/
+%{_datadir}/wayland/wayland-scanner.mk
+%{_datadir}/wayland/wayland.dtd
+%{_datadir}/wayland/wayland.xml
+%{_datadir}/aclocal/%{name}-scanner.m4
+#--------------------------------------------
 
 %package -n %{client_libname}
 Summary:	Libraries for %{client_name}
@@ -66,12 +77,22 @@ Group:		System/Libraries
 %description -n %{client_libname}
 This package contains the libraries for %{client_name}.
 
+%files -n %{client_libname}
+%doc COPYING README TODO
+%{_libdir}/lib%{client_name}.so.%{client_major}*
+#--------------------------------------------
+
 %package -n %{server_libname}
 Summary:	Libraries for %{server_name}
 Group:		System/Libraries
 
 %description -n %{server_libname}
 This package contains the libraries for %{server_name}.
+
+%files -n %{server_libname}
+%doc COPYING README TODO
+%{_libdir}/lib%{server_name}.so.%{server_major}*
+#--------------------------------------------
 
 %package -n %{cursor_libname}
 Summary:	Libraries for %{cursor_name}
@@ -80,6 +101,11 @@ Group:		System/Libraries
 %description -n %{cursor_libname}
 This package contains the libraries for %{cursor_name}.
 
+%files -n %{cursor_libname}
+%doc COPYING README TODO
+%{_libdir}/lib%{cursor_name}.so.%{cursor_major}*
+#--------------------------------------------
+
 %package tools
 Summary:	%{name} devel tools
 Group:		System/Libraries
@@ -87,12 +113,22 @@ Group:		System/Libraries
 %description tools
 This package contains development tools for %{name}.
 
+%files tools
+%doc COPYING README TODO
+%{_bindir}/%{name}-scanner
+#--------------------------------------------
+
 %package doc
 Summary:	%{name} documentation
 Group:		Development/Other
 
 %description doc
 This package contains documentation of %{name}.
+
+%files doc
+%{_mandir}/man3/wl_*.3*
+%{_docdir}/%{name}/
+#--------------------------------------------
 
 %prep
 %setup -q
@@ -106,29 +142,4 @@ autoreconf -vfi
 
 %install
 %makeinstall_std
-
-%files -n %{client_libname}
-%{_libdir}/lib%{client_name}.so.%{client_major}*
-
-%files -n %{server_libname}
-%{_libdir}/lib%{server_name}.so.%{server_major}*
-
-%files -n %{cursor_libname}
-%{_libdir}/lib%{cursor_name}.so.%{cursor_major}*
-
-%files -n %{devname}
-%{_includedir}/%{name}-*.h
-%{_libdir}/lib%{name}*.so
-%{_libdir}/pkgconfig/%{name}*.pc
-%dir %{_datadir}/wayland/
-%{_datadir}/wayland/wayland-scanner.mk
-%{_datadir}/wayland/wayland.dtd
-%{_datadir}/wayland/wayland.xml
-%{_datadir}/aclocal/%{name}-scanner.m4
-
-%files tools
-%{_bindir}/%{name}-scanner
-
-%files doc
-%{_mandir}/man3/wl_*.3*
-%{_docdir}/%{name}/
+find %{buildroot} -size 0 -delete
