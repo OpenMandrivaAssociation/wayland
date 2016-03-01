@@ -28,6 +28,7 @@ BuildRequires:	xsltproc
 BuildRequires:	xmlto
 BuildRequires:	pkgconfig(expat)
 BuildRequires:	pkgconfig(libffi)
+BuildRequires:	pkgconfig(libxml-2.0)
 BuildRequires:	graphviz
 
 %track
