@@ -1,0 +1,11 @@
+--- wayland-1.10.0/src/wayland-util.h.omv~	2016-03-30 13:05:55.679317767 +0200
++++ wayland-1.10.0/src/wayland-util.h	2016-03-30 13:07:06.979314547 +0200
+@@ -214,7 +214,7 @@ struct wl_array {
+ 
+ #define wl_array_for_each(pos, array)					\
+ 	for (pos = (array)->data;					\
+-	     (const char *) pos < ((const char *) (array)->data + (array)->size); \
++	     (uintptr_t) pos < ((uintptr_t) (array)->data + (array)->size); \
+ 	     (pos)++)
+ 
+ void
