@@ -61,7 +61,6 @@ This package contains the header and pkg-config files for developing
 with %{name}.
 
 %files -n %{devname}
-%doc COPYING README TODO
 %{_includedir}/%{name}-*.h
 %{_libdir}/lib%{name}*.so
 %{_libdir}/pkgconfig/%{name}*.pc
@@ -80,7 +79,6 @@ Group:		System/Libraries
 This package contains the libraries for %{client_name}.
 
 %files -n %{client_libname}
-%doc COPYING README TODO
 %{_libdir}/lib%{client_name}.so.%{client_major}*
 #--------------------------------------------
 
@@ -92,7 +90,6 @@ Group:		System/Libraries
 This package contains the libraries for %{server_name}.
 
 %files -n %{server_libname}
-%doc COPYING README TODO
 %{_libdir}/lib%{server_name}.so.%{server_major}*
 #--------------------------------------------
 
@@ -104,7 +101,6 @@ Group:		System/Libraries
 This package contains the libraries for %{cursor_name}.
 
 %files -n %{cursor_libname}
-%doc COPYING README TODO
 %{_libdir}/lib%{cursor_name}.so.%{cursor_major}*
 #--------------------------------------------
 
@@ -116,7 +112,6 @@ Group:		System/Libraries
 This package contains development tools for %{name}.
 
 %files tools
-%doc COPYING README TODO
 %{_bindir}/%{name}-scanner
 #--------------------------------------------
 
@@ -128,6 +123,7 @@ Group:		Development/Other
 This package contains documentation of %{name}.
 
 %files doc
+%doc COPYING README TODO
 %{_mandir}/man3/wl_*.3*
 %{_docdir}/%{name}/
 #--------------------------------------------
