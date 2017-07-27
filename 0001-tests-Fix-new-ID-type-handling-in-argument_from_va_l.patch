@@ -1,0 +1,53 @@
+From 680a6b32de49896dc290968f83a1e4cce315888e Mon Sep 17 00:00:00 2001
+From: Carlos Garnacho <carlosg@gnome.org>
+Date: Thu, 23 Feb 2017 13:47:41 +0100
+Subject: [PATCH] tests: Fix "new ID" type handling in argument_from_va_list
+ test
+
+New IDs are internally dealt with as objects, however this test
+expected to deal with 'n' as the uint32_t type that's just seen
+through the wire. We should give it an object instead, and
+expect an object from it.
+
+https://bugs.freedesktop.org/show_bug.cgi?id=99899
+
+Signed-off-by: Carlos Garnacho <carlosg@gnome.org>
+Reviewed-by: Pekka Paalanen <pekka.paalanen@collabora.co.uk>
+Tested-by: Kalev Lember <kalevlember@gmail.com>
+Reviewed-by: Yong Bakos <ybakos@humanoriented.com>
+---
+ tests/connection-test.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/tests/connection-test.c b/tests/connection-test.c
+index 1c688f1..8be6c38 100644
+--- a/tests/connection-test.c
++++ b/tests/connection-test.c
+@@ -142,7 +142,7 @@ va_list_wrapper(const char *signature, union wl_argument *args, int count, ...)
+ TEST(argument_from_va_list)
+ {
+    union wl_argument args[WL_CLOSURE_MAX_ARGS];
+-	struct wl_object fake_object;
++	struct wl_object fake_object, fake_new_object;
+    struct wl_array fake_array;
+ 
+    va_list_wrapper("i", args, 1, 100);
+@@ -154,13 +154,13 @@ TEST(argument_from_va_list)
+ 
+    va_list_wrapper("?iuf?sonah", args, 8,
+	    102, 103, wl_fixed_from_int(104), "value",
+-			&fake_object, 105, &fake_array, 106);
++			&fake_object, &fake_new_object, &fake_array, 106);
+    assert(args[0].i == 102);
+    assert(args[1].u == 103);
+    assert(args[2].f == wl_fixed_from_int(104));
+    assert(strcmp(args[3].s, "value") == 0);
+    assert(args[4].o == &fake_object);
+-	assert(args[5].n == 105);
++	assert(args[5].o == &fake_new_object);
+    assert(args[6].a == &fake_array);
+    assert(args[7].h == 106);
+ }
+-- 
+2.12.0
+

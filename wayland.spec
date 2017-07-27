@@ -15,14 +15,14 @@
 
 Summary:	Wayland Compositor Infrastructure
 Name:		wayland
-Version:	1.12.0
+Version:	1.13.0
 Release:	1
 License:	MIT
 Group:		System/Libraries
 Url:		http://wayland.freedesktop.org/
 Source0:	http://wayland.freedesktop.org/releases/%{name}-%{version}.tar.xz
-Patch0:		wayland-1.10.0-wl_array_for_each-clang++.patch
-
+#Patch0:		wayland-1.10.0-wl_array_for_each-clang++.patch
+Patch1:		0001-tests-Fix-new-ID-type-handling-in-argument_from_va_l.patch
 BuildRequires:	docbook-style-xsl
 BuildRequires:	doxygen
 BuildRequires:	xsltproc
