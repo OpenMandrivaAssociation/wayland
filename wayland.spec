@@ -17,8 +17,8 @@
 
 Summary:	Wayland Compositor Infrastructure
 Name:		wayland
-Version:	1.14.0
-Release:	2
+Version:	1.15.0
+Release:	1
 License:	MIT
 Group:		System/Libraries
 Url:		http://wayland.freedesktop.org/
@@ -32,13 +32,6 @@ BuildRequires:	pkgconfig(expat)
 BuildRequires:	pkgconfig(libffi)
 BuildRequires:	pkgconfig(libxml-2.0)
 BuildRequires:	graphviz
-
-%track
-prog %{name} = {
-	url = http://wayland.freedesktop.org/releases.html
-	version = %{version}
-	regex = %{name}-(__VER__)\.tar\.xz
-}
 
 %description
 Wayland is a protocol for a compositor to talk to its clients as well
