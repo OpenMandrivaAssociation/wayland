@@ -109,7 +109,7 @@ Group:		System/Libraries
 %description -n %{egl_libname}
 This package contains the libraries for %{egl_name}.
 
-%files -n %{cursor_libname}
+%files -n %{egl_libname}
 %{_libdir}/lib%{egl_name}.so.%{egl_major}*
 #--------------------------------------------
 
