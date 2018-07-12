@@ -1,6 +1,7 @@
 %define client_major 0
 %define server_major 0
 %define cursor_major 0
+%define egl_major 1
 
 %define devname %mklibname %{name} -d
 
@@ -13,17 +14,19 @@
 %define cursor_name %{name}-cursor
 %define cursor_libname %mklibname %{cursor_name} %{cursor_major}
 
+%define egl_name %{name}-egl
+%define egl_libname %mklibname %{egl_name} %{egl_major}
+
 %define _disable_lto 1
 
 Summary:	Wayland Compositor Infrastructure
 Name:		wayland
-Version:	1.14.0
-Release:	2
+Version:	1.15.0
+Release:	1
 License:	MIT
 Group:		System/Libraries
 Url:		http://wayland.freedesktop.org/
 Source0:	http://wayland.freedesktop.org/releases/%{name}-%{version}.tar.xz
-#Patch0:		wayland-1.10.0-wl_array_for_each-clang++.patch
 BuildRequires:	docbook-style-xsl
 BuildRequires:	doxygen
 BuildRequires:	xsltproc
@@ -32,13 +35,6 @@ BuildRequires:	pkgconfig(expat)
 BuildRequires:	pkgconfig(libffi)
 BuildRequires:	pkgconfig(libxml-2.0)
 BuildRequires:	graphviz
-
-%track
-prog %{name} = {
-	url = http://wayland.freedesktop.org/releases.html
-	version = %{version}
-	regex = %{name}-(__VER__)\.tar\.xz
-}
 
 %description
 Wayland is a protocol for a compositor to talk to its clients as well
@@ -55,6 +51,7 @@ Provides:	%{name}-devel = %{EVRD}
 Requires:	%{client_libname} = %{EVRD}
 Requires:	%{server_libname} = %{EVRD}
 Requires:	%{cursor_libname} = %{EVRD}
+Requires:	%{egl_libname} = %{EVRD}
 Requires:	%{name}-tools = %{EVRD}
 
 %description -n %{devname}
@@ -103,6 +100,17 @@ This package contains the libraries for %{cursor_name}.
 
 %files -n %{cursor_libname}
 %{_libdir}/lib%{cursor_name}.so.%{cursor_major}*
+#--------------------------------------------
+
+%package -n %{egl_libname}
+Summary:	Libraries for %{egl_name}
+Group:		System/Libraries
+
+%description -n %{egl_libname}
+This package contains the libraries for %{egl_name}.
+
+%files -n %{egl_libname}
+%{_libdir}/lib%{egl_name}.so.%{egl_major}*
 #--------------------------------------------
 
 %package tools
