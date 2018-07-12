@@ -150,7 +150,8 @@ This package contains documentation of %{name}.
 
 %build
 %configure \
-	--disable-static
+	--disable-static \
+	--disable-documentation
 
 %make
 
