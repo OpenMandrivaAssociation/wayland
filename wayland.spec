@@ -2,6 +2,7 @@
 %define server_major 0
 %define cursor_major 0
 %define egl_major 1
+%define egl_epoch 1
 
 %define devname %mklibname %{name} -d
 
@@ -22,7 +23,7 @@
 Summary:	Wayland Compositor Infrastructure
 Name:		wayland
 Version:	1.15.0
-Release:	1
+Release:	2
 License:	MIT
 Group:		System/Libraries
 Url:		http://wayland.freedesktop.org/
@@ -51,8 +52,11 @@ Provides:	%{name}-devel = %{EVRD}
 Requires:	%{client_libname} = %{EVRD}
 Requires:	%{server_libname} = %{EVRD}
 Requires:	%{cursor_libname} = %{EVRD}
-Requires:	%{egl_libname} = %{EVRD}
+Requires:	%{egl_libname} = %{egl_epoch}:%{version}-%{release}
 Requires:	%{name}-tools = %{EVRD}
+Conflicts:	libwayland-egl-devel
+Conflicts:	lib64wayland-egl-devel
+Obsoletes:	%{mklibname wayland-egl -d}
 
 %description -n %{devname}
 This package contains the header and pkg-config files for developing
@@ -105,6 +109,9 @@ This package contains the libraries for %{cursor_name}.
 %package -n %{egl_libname}
 Summary:	Libraries for %{egl_name}
 Group:		System/Libraries
+# mesa version was higher than wayland one:
+Epoch:		%{egl_epoch}
+Provides:	lib%{egl_name} = %{version}-%{release}
 
 %description -n %{egl_libname}
 This package contains the libraries for %{egl_name}.
