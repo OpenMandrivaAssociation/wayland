@@ -140,8 +140,7 @@ This package contains documentation of %{name}.
 
 %files doc
 %doc COPYING README TODO
-%{_mandir}/man3/wl_*.3*
-%{_docdir}/%{name}/
+
 #--------------------------------------------
 
 %prep
