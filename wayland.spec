@@ -18,12 +18,12 @@
 %define egl_name %{name}-egl
 %define egl_libname %mklibname %{egl_name} %{egl_major}
 
-%define _disable_lto 1
+%global optflags %{optflags} -Ofast
 
 Summary:	Wayland Compositor Infrastructure
 Name:		wayland
 Version:	1.15.0
-Release:	2
+Release:	3
 License:	MIT
 Group:		System/Libraries
 Url:		http://wayland.freedesktop.org/
