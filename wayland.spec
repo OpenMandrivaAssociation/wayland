@@ -22,8 +22,8 @@
 
 Summary:	Wayland Compositor Infrastructure
 Name:		wayland
-Version:	1.15.0
-Release:	3
+Version:	1.16.0
+Release:	2
 License:	MIT
 Group:		System/Libraries
 Url:		http://wayland.freedesktop.org/
@@ -144,16 +144,15 @@ This package contains documentation of %{name}.
 #--------------------------------------------
 
 %prep
-%setup -q
-%apply_patches
+%autosetup -p1
 
 %build
 %configure \
 	--disable-static \
 	--disable-documentation
 
-%make
+%make_build
 
 %install
-%makeinstall_std
+%make_install
 find %{buildroot} -size 0 -delete
