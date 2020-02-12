@@ -24,7 +24,7 @@
 Summary:	Wayland Compositor Infrastructure
 Name:		wayland
 Version:	1.18.0
-Release:	1
+Release:	2
 License:	MIT
 Group:		System/Libraries
 Url:		http://wayland.freedesktop.org/
@@ -35,6 +35,7 @@ BuildRequires:	docbook-style-xsl
 BuildRequires:	xmlto
 %endif
 BuildRequires:	doxygen
+BuildRequires:	meson
 BuildRequires:	xsltproc
 BuildRequires:	pkgconfig(expat)
 BuildRequires:	pkgconfig(libffi)
@@ -154,14 +155,9 @@ This package contains documentation of %{name}.
 %autosetup -p1
 
 %build
-%configure \
-%if !%{with docs}
-	--disable-documentation \
-%endif
-	--disable-static
-
-%make_build
+%meson
+%meson_build
 
 %install
-%make_install
+%meson_install
 find %{buildroot} -size 0 -delete
