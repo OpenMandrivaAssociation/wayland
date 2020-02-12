@@ -19,7 +19,6 @@
 %define egl_libname %mklibname %{egl_name} %{egl_major}
 
 %global optflags %{optflags} -Ofast
-%bcond_with docs
 
 Summary:	Wayland Compositor Infrastructure
 Name:		wayland
@@ -30,10 +29,8 @@ Group:		System/Libraries
 Url:		http://wayland.freedesktop.org/
 Source0:	http://wayland.freedesktop.org/releases/%{name}-%{version}.tar.xz
 
-%if %{with docs}
 BuildRequires:	docbook-style-xsl
 BuildRequires:	xmlto
-%endif
 BuildRequires:	doxygen
 BuildRequires:	meson
 BuildRequires:	xsltproc
@@ -136,7 +133,6 @@ This package contains development tools for %{name}.
 %{_bindir}/%{name}-scanner
 #--------------------------------------------
 
-%if %{with docs}
 %package doc
 Summary:	%{name} documentation
 Group:		Development/Other
@@ -149,7 +145,6 @@ This package contains documentation of %{name}.
 %{_mandir}/man3/wl_*.3*
 %{_docdir}/%{name}/
 #--------------------------------------------
-%endif
 
 %prep
 %autosetup -p1
