@@ -1,3 +1,10 @@
+# Wayland is used by mesa, mesa is used by wine
+%ifarch %{x86_64}
+%bcond_without compat32
+%else
+%bcond_with compat32
+%endif
+
 %define client_major 0
 %define server_major 0
 %define cursor_major 0
@@ -5,25 +12,30 @@
 %define egl_epoch 1
 
 %define devname %mklibname %{name} -d
+%define dev32name lib%{name}-devel
 
 %define client_name %{name}-client
 %define client_libname %mklibname %{client_name} %{client_major}
+%define client_lib32name lib%{client_name}%{client_major}
 
 %define server_name %{name}-server
 %define server_libname %mklibname %{server_name} %{server_major}
+%define server_lib32name lib%{server_name}%{server_major}
 
 %define cursor_name %{name}-cursor
 %define cursor_libname %mklibname %{cursor_name} %{cursor_major}
+%define cursor_lib32name lib%{cursor_name}%{cursor_major}
 
 %define egl_name %{name}-egl
 %define egl_libname %mklibname %{egl_name} %{egl_major}
+%define egl_lib32name lib%{egl_name}%{egl_major}
 
 %global optflags %{optflags} -Ofast
 
 Summary:	Wayland Compositor Infrastructure
 Name:		wayland
 Version:	1.18.0
-Release:	2
+Release:	3
 License:	MIT
 Group:		System/Libraries
 Url:		http://wayland.freedesktop.org/
@@ -38,6 +50,11 @@ BuildRequires:	pkgconfig(expat)
 BuildRequires:	pkgconfig(libffi)
 BuildRequires:	pkgconfig(libxml-2.0)
 BuildRequires:	graphviz
+%if %{with compat32}
+BuildRequires:	devel(libexpat)
+BuildRequires:	devel(libffi)
+BuildRequires:	devel(libxml2)
+%endif
 
 %description
 Wayland is a protocol for a compositor to talk to its clients as well
@@ -146,13 +163,89 @@ This package contains documentation of %{name}.
 %{_docdir}/%{name}/
 #--------------------------------------------
 
+%if %{with compat32}
+%package -n %{dev32name}
+Summary:	Header files for %{name} (32-bit)
+Group:		Development/C
+Requires:	%{client_lib32name} = %{EVRD}
+Requires:	%{server_lib32name} = %{EVRD}
+Requires:	%{cursor_lib32name} = %{EVRD}
+Requires:	%{egl_lib32name} = %{egl_epoch}:%{version}-%{release}
+Requires:	%{name}-tools = %{EVRD}
+
+%description -n %{dev32name}
+This package contains the header and pkg-config files for developing
+with %{name}.
+
+%files -n %{dev32name}
+%{_prefix}/lib/lib%{name}*.so
+%{_prefix}/lib/pkgconfig/%{name}*.pc
+#--------------------------------------------
+
+%package -n %{client_lib32name}
+Summary:	Libraries for %{client_name} (32-bit)
+Group:		System/Libraries
+
+%description -n %{client_lib32name}
+This package contains the libraries for %{client_name}.
+
+%files -n %{client_lib32name}
+%{_prefix}/lib/lib%{client_name}.so.%{client_major}*
+#--------------------------------------------
+
+%package -n %{server_lib32name}
+Summary:	Libraries for %{server_name} (32-bit)
+Group:		System/Libraries
+
+%description -n %{server_lib32name}
+This package contains the libraries for %{server_name}.
+
+%files -n %{server_lib32name}
+%{_prefix}/lib/lib%{server_name}.so.%{server_major}*
+#--------------------------------------------
+
+%package -n %{cursor_lib32name}
+Summary:	Libraries for %{cursor_name} (32-bit)
+Group:		System/Libraries
+
+%description -n %{cursor_lib32name}
+This package contains the libraries for %{cursor_name}.
+
+%files -n %{cursor_lib32name}
+%{_prefix}/lib/lib%{cursor_name}.so.%{cursor_major}*
+#--------------------------------------------
+
+%package -n %{egl_lib32name}
+Summary:	Libraries for %{egl_name} (32-bit)
+Group:		System/Libraries
+# mesa version was higher than wayland one:
+Epoch:		%{egl_epoch}
+
+%description -n %{egl_lib32name}
+This package contains the libraries for %{egl_name}.
+
+%files -n %{egl_lib32name}
+%{_prefix}/lib/lib%{egl_name}.so.%{egl_major}*
+#--------------------------------------------
+%endif
+
+
 %prep
 %autosetup -p1
+%if %{with compat32}
+%meson32
+%endif
+%meson
 
 %build
-%meson
+%if %{with compat32}
+%ninja_build -C build32
+%endif
 %meson_build
 
 %install
+%if %{with compat32}
+%ninja_install -C build32
+%endif
 %meson_install
 find %{buildroot} -size 0 -delete
