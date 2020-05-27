@@ -125,20 +125,6 @@ This package contains the libraries for %{cursor_name}.
 %{_libdir}/lib%{cursor_name}.so.%{cursor_major}*
 #--------------------------------------------
 
-%package -n %{egl_libname}
-Summary:	Libraries for %{egl_name}
-Group:		System/Libraries
-# mesa version was higher than wayland one:
-Epoch:		%{egl_epoch}
-Provides:	lib%{egl_name} = %{version}-%{release}
-
-%description -n %{egl_libname}
-This package contains the libraries for %{egl_name}.
-
-%files -n %{egl_libname}
-%{_libdir}/lib%{egl_name}.so.%{egl_major}*
-#--------------------------------------------
-
 %package tools
 Summary:	%{name} devel tools
 Group:		System/Libraries
@@ -228,6 +214,20 @@ This package contains the libraries for %{egl_name}.
 %{_prefix}/lib/lib%{egl_name}.so.%{egl_major}*
 #--------------------------------------------
 %endif
+#--------------------------------------------
+
+%package -n %{egl_libname}
+Summary:	Libraries for %{egl_name}
+Group:		System/Libraries
+# mesa version was higher than wayland one:
+Epoch:		%{egl_epoch}
+Provides:	lib%{egl_name} = %{version}-%{release}
+
+%description -n %{egl_libname}
+This package contains the libraries for %{egl_name}.
+
+%files -n %{egl_libname}
+%{_libdir}/lib%{egl_name}.so.%{egl_major}*
 
 
 %prep
