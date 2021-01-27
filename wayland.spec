@@ -144,7 +144,7 @@ Group:		Development/Other
 This package contains documentation of %{name}.
 
 %files doc
-%doc COPYING README TODO
+%doc COPYING README
 %{_mandir}/man3/wl_*.3*
 %{_docdir}/%{name}/
 #--------------------------------------------
