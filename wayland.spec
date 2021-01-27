@@ -34,8 +34,8 @@
 
 Summary:	Wayland Compositor Infrastructure
 Name:		wayland
-Version:	1.18.0
-Release:	3
+Version:	1.19.0
+Release:	1
 License:	MIT
 Group:		System/Libraries
 Url:		http://wayland.freedesktop.org/
@@ -144,7 +144,7 @@ Group:		Development/Other
 This package contains documentation of %{name}.
 
 %files doc
-%doc COPYING README TODO
+%doc COPYING README
 %{_mandir}/man3/wl_*.3*
 %{_docdir}/%{name}/
 #--------------------------------------------
