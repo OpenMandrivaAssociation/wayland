@@ -30,12 +30,12 @@
 %define egl_libname %mklibname %{egl_name} %{egl_major}
 %define egl_lib32name lib%{egl_name}%{egl_major}
 
-%global optflags %{optflags} -Ofast
+%global optflags %{optflags} -O3
 
 Summary:	Wayland Compositor Infrastructure
 Name:		wayland
 Version:	1.19.0
-Release:	1
+Release:	2
 License:	MIT
 Group:		System/Libraries
 Url:		http://wayland.freedesktop.org/
