@@ -95,6 +95,7 @@ with %{name}.
 %package -n %{client_libname}
 Summary:	Libraries for %{client_name}
 Group:		System/Libraries
+Requires:	dri-drivers
 
 %description -n %{client_libname}
 This package contains the libraries for %{client_name}.
@@ -106,6 +107,7 @@ This package contains the libraries for %{client_name}.
 %package -n %{server_libname}
 Summary:	Libraries for %{server_name}
 Group:		System/Libraries
+Requires:	dri-drivers
 
 %description -n %{server_libname}
 This package contains the libraries for %{server_name}.
@@ -222,6 +224,7 @@ Group:		System/Libraries
 # mesa version was higher than wayland one:
 Epoch:		%{egl_epoch}
 Provides:	lib%{egl_name} = %{version}-%{release}
+Requires:	dri-drivers
 
 %description -n %{egl_libname}
 This package contains the libraries for %{egl_name}.
@@ -229,9 +232,11 @@ This package contains the libraries for %{egl_name}.
 %files -n %{egl_libname}
 %{_libdir}/lib%{egl_name}.so.%{egl_major}*
 
-
 %prep
 %autosetup -p1
+# (tpg) skip build tests
+sed -i -e "s/subdir('tests')//g" meson.build
+
 %if %{with compat32}
 %meson32
 %endif
