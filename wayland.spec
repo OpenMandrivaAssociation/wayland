@@ -35,7 +35,7 @@
 Summary:	Wayland Compositor Infrastructure
 Name:		wayland
 Version:	1.20.0
-Release:	1
+Release:	2
 License:	MIT
 Group:		System/Libraries
 Url:		http://wayland.freedesktop.org/
@@ -95,7 +95,6 @@ with %{name}.
 %package -n %{client_libname}
 Summary:	Libraries for %{client_name}
 Group:		System/Libraries
-Requires:	dri-drivers
 
 %description -n %{client_libname}
 This package contains the libraries for %{client_name}.
@@ -107,7 +106,6 @@ This package contains the libraries for %{client_name}.
 %package -n %{server_libname}
 Summary:	Libraries for %{server_name}
 Group:		System/Libraries
-Requires:	dri-drivers
 
 %description -n %{server_libname}
 This package contains the libraries for %{server_name}.
@@ -224,7 +222,6 @@ Group:		System/Libraries
 # mesa version was higher than wayland one:
 Epoch:		%{egl_epoch}
 Provides:	lib%{egl_name} = %{version}-%{release}
-Requires:	dri-drivers
 
 %description -n %{egl_libname}
 This package contains the libraries for %{egl_name}.
