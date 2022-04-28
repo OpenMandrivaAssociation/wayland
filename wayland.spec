@@ -35,7 +35,7 @@
 Summary:	Wayland Compositor Infrastructure
 Name:		wayland
 Version:	1.20.0
-Release:	3
+Release:	4
 License:	MIT
 Group:		System/Libraries
 Url:		http://wayland.freedesktop.org/
@@ -95,6 +95,8 @@ with %{name}.
 %package -n %{client_libname}
 Summary:	Libraries for %{client_name}
 Group:		System/Libraries
+# Add virtual provides to libwayland-client to satisfy dependency requires for Google Chrome 103+
+Provides: libwayland-client
 
 %description -n %{client_libname}
 This package contains the libraries for %{client_name}.
