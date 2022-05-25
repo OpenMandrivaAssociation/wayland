@@ -35,7 +35,7 @@
 Summary:	Wayland Compositor Infrastructure
 Name:		wayland
 Version:	1.20.0
-Release:	4
+Release:	5
 License:	MIT
 Group:		System/Libraries
 Url:		http://wayland.freedesktop.org/
@@ -47,7 +47,7 @@ BuildRequires:	doxygen
 BuildRequires:	meson
 BuildRequires:	xsltproc
 BuildRequires:	pkgconfig(expat)
-BuildRequires:	pkgconfig(libffi)
+BuildRequires:	pkgconfig(libffi) >= 3.4.2-2
 BuildRequires:	pkgconfig(libxml-2.0)
 BuildRequires:	graphviz
 %if %{with compat32}
@@ -96,7 +96,7 @@ with %{name}.
 Summary:	Libraries for %{client_name}
 Group:		System/Libraries
 # Add virtual provides to libwayland-client to satisfy dependency requires for Google Chrome 103+
-Provides: libwayland-client
+Provides:	libwayland-client
 
 %description -n %{client_libname}
 This package contains the libraries for %{client_name}.
