@@ -47,11 +47,13 @@ BuildRequires:	meson
 BuildRequires:	xsltproc
 BuildRequires:	pkgconfig(expat)
 BuildRequires:	pkgconfig(libffi) >= 3.4.2-2
+BuildRequires:  pkgconfig(liblzma)
 BuildRequires:	pkgconfig(libxml-2.0)
 BuildRequires:	graphviz
 %if %{with compat32}
 BuildRequires:	devel(libexpat)
 BuildRequires:	devel(libffi)
+BuildRequires:  devel(liblzma)
 BuildRequires:	devel(libxml2)
 %endif
 
