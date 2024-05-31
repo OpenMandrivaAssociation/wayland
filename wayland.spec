@@ -52,6 +52,7 @@ BuildRequires:	graphviz
 %if %{with compat32}
 BuildRequires:	devel(libexpat)
 BuildRequires:	devel(libffi)
+BuildRequires:  devel(liblzma)
 BuildRequires:	devel(libxml2)
 %endif
 
