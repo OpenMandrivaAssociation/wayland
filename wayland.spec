@@ -35,11 +35,13 @@
 Summary:	Wayland Compositor Infrastructure
 Name:		wayland
 Version:	1.23.0
-Release:	1
+Release:	2
 License:	MIT
 Group:		System/Libraries
 Url:		http://wayland.freedesktop.org/
 Source0:	https://gitlab.freedesktop.org/wayland/wayland/-/releases/%{version}/downloads/%{name}-%{version}.tar.xz
+# Not yet merged, but required for wlroots0.18
+Patch0:  https://gitlab.freedesktop.org/wayland/wayland/-/merge_requests/401.patch
 BuildRequires:	docbook-style-xsl
 BuildRequires:	xmlto
 BuildRequires:	doxygen
