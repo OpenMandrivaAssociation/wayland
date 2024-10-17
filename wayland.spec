@@ -38,7 +38,7 @@ Version:	1.23.1
 Release:	1
 License:	MIT
 Group:		System/Libraries
-Url:		http://wayland.freedesktop.org/
+Url:		https://wayland.freedesktop.org/
 Source0:	https://gitlab.freedesktop.org/wayland/wayland/-/releases/%{version}/downloads/%{name}-%{version}.tar.xz
 BuildRequires:	docbook-style-xsl
 BuildRequires:	xmlto
