@@ -35,7 +35,7 @@
 Summary:	Wayland Compositor Infrastructure
 Name:		wayland
 Version:	1.23.1
-Release:	1
+Release:	2
 License:	MIT
 Group:		System/Libraries
 Url:		https://wayland.freedesktop.org/
@@ -98,6 +98,9 @@ Summary:	Libraries for %{client_name}
 Group:		System/Libraries
 # Add virtual provides to libwayland-client to satisfy dependency requires for Google Chrome 103+
 Provides:	libwayland-client
+# We need the output and wayland shell integration plugins for any Qt+Wayland combination
+Requires:	(%{_lib}Qt6WaylandClient if %{_lib}Qt6Gui)
+Requires:	(%{_lib}Qt6WlShellIntegration if %{_lib}Qt6Gui)
 
 %description -n %{client_libname}
 This package contains the libraries for %{client_name}.
