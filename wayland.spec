@@ -15,35 +15,43 @@
 %define dev32name lib%{name}-devel
 
 %define client_name %{name}-client
-%define client_libname %mklibname %{client_name} %{client_major}
-%define client_lib32name lib%{client_name}%{client_major}
+%define oldclient_libname %mklibname %{client_name} %{client_major}
+%define oldclient_lib32name lib%{client_name}%{client_major}
+%define client_libname %mklibname %{client_name}
+%define client_lib32name lib%{client_name}
 
 %define server_name %{name}-server
-%define server_libname %mklibname %{server_name} %{server_major}
-%define server_lib32name lib%{server_name}%{server_major}
+%define oldserver_libname %mklibname %{server_name} %{server_major}
+%define oldserver_lib32name lib%{server_name}%{server_major}
+%define server_libname %mklibname %{server_name}
+%define server_lib32name lib%{server_name}
 
 %define cursor_name %{name}-cursor
-%define cursor_libname %mklibname %{cursor_name} %{cursor_major}
-%define cursor_lib32name lib%{cursor_name}%{cursor_major}
+%define oldcursor_libname %mklibname %{cursor_name} %{cursor_major}
+%define oldcursor_lib32name lib%{cursor_name}%{cursor_major}
+%define cursor_libname %mklibname %{cursor_name}
+%define cursor_lib32name lib%{cursor_name}
 
 %define egl_name %{name}-egl
-%define egl_libname %mklibname %{egl_name} %{egl_major}
-%define egl_lib32name lib%{egl_name}%{egl_major}
+%define oldegl_libname %mklibname %{egl_name} %{egl_major}
+%define oldegl_lib32name lib%{egl_name}%{egl_major}
+%define egl_libname %mklibname %{egl_name}
+%define egl_lib32name lib%{egl_name}
 
 %global optflags %{optflags} -O3
 
 Summary:	Wayland Compositor Infrastructure
 Name:		wayland
 Version:	1.24.0
-Release:	1
+Release:	2
 License:	MIT
 Group:		System/Libraries
 Url:		https://wayland.freedesktop.org/
 Source0:	https://gitlab.freedesktop.org/wayland/wayland/-/releases/%{version}/downloads/%{name}-%{version}.tar.xz
+BuildSystem:	meson
 BuildRequires:	docbook-style-xsl
 BuildRequires:	xmlto
 BuildRequires:	doxygen
-BuildRequires:	meson
 BuildRequires:	xsltproc
 BuildRequires:	pkgconfig(expat)
 BuildRequires:	pkgconfig(libffi) >= 3.4.2-2
@@ -101,6 +109,7 @@ Provides:	libwayland-client
 # We need the output and wayland shell integration plugins for any Qt+Wayland combination
 Requires:	(%{_lib}Qt6WaylandClient if %{_lib}Qt6Gui)
 Requires:	(%{_lib}Qt6WlShellIntegration if %{_lib}Qt6Gui)
+%rename %{oldclient_libname}
 
 %description -n %{client_libname}
 This package contains the libraries for %{client_name}.
@@ -112,6 +121,7 @@ This package contains the libraries for %{client_name}.
 %package -n %{server_libname}
 Summary:	Libraries for %{server_name}
 Group:		System/Libraries
+%rename %{oldserver_libname}
 
 %description -n %{server_libname}
 This package contains the libraries for %{server_name}.
@@ -123,6 +133,7 @@ This package contains the libraries for %{server_name}.
 %package -n %{cursor_libname}
 Summary:	Libraries for %{cursor_name}
 Group:		System/Libraries
+%rename %{oldcursor_libname}
 
 %description -n %{cursor_libname}
 This package contains the libraries for %{cursor_name}.
@@ -177,6 +188,7 @@ with %{name}.
 %package -n %{client_lib32name}
 Summary:	Libraries for %{client_name} (32-bit)
 Group:		System/Libraries
+%rename %{oldclient_lib32name}
 
 %description -n %{client_lib32name}
 This package contains the libraries for %{client_name}.
@@ -188,6 +200,7 @@ This package contains the libraries for %{client_name}.
 %package -n %{server_lib32name}
 Summary:	Libraries for %{server_name} (32-bit)
 Group:		System/Libraries
+%rename %{oldserver_lib32name}
 
 %description -n %{server_lib32name}
 This package contains the libraries for %{server_name}.
@@ -199,6 +212,7 @@ This package contains the libraries for %{server_name}.
 %package -n %{cursor_lib32name}
 Summary:	Libraries for %{cursor_name} (32-bit)
 Group:		System/Libraries
+%rename %{oldcursor_lib32name}
 
 %description -n %{cursor_lib32name}
 This package contains the libraries for %{cursor_name}.
@@ -212,6 +226,7 @@ Summary:	Libraries for %{egl_name} (32-bit)
 Group:		System/Libraries
 # mesa version was higher than wayland one:
 Epoch:		%{egl_epoch}
+%rename %{oldegl_lib32name}
 
 %description -n %{egl_lib32name}
 This package contains the libraries for %{egl_name}.
@@ -228,6 +243,7 @@ Group:		System/Libraries
 # mesa version was higher than wayland one:
 Epoch:		%{egl_epoch}
 Provides:	lib%{egl_name} = %{version}-%{release}
+%rename %{oldegl_libname}
 
 %description -n %{egl_libname}
 This package contains the libraries for %{egl_name}.
@@ -235,25 +251,9 @@ This package contains the libraries for %{egl_name}.
 %files -n %{egl_libname}
 %{_libdir}/lib%{egl_name}.so.%{egl_major}*
 
-%prep
-%autosetup -p1
+%prep -a
 # (tpg) skip build tests
 sed -i -e "s/subdir('tests')//g" meson.build
 
-%if %{with compat32}
-%meson32
-%endif
-%meson
-
-%build
-%if %{with compat32}
-%ninja_build -C build32
-%endif
-%meson_build
-
-%install
-%if %{with compat32}
-%ninja_install -C build32
-%endif
-%meson_install
+%install -a
 find %{buildroot} -size 0 -delete
