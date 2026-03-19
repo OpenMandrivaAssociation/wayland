@@ -155,17 +155,18 @@ This package contains development tools for %{name}.
 %{_bindir}/%{name}-scanner
 #--------------------------------------------
 
-%package doc
-Summary:	%{name} documentation
-Group:		Development/Other
+# doc is disabled due missing in Cooker mdBook package
+#package doc
+#Summary:	%{name} documentation
+#Group:		Development/Other
 
-%description doc
+#description doc
 This package contains documentation of %{name}.
 
-%files doc
-%doc COPYING README*
-%{_mandir}/man3/wl_*.3*
-%{_docdir}/%{name}/
+#files doc
+#doc COPYING README*
+#{_mandir}/man3/wl_*.3*
+#{_docdir}/%{name}/
 #--------------------------------------------
 
 %if %{with compat32}
