@@ -161,7 +161,7 @@ This package contains development tools for %{name}.
 #Group:		Development/Other
 
 #description doc
-This package contains documentation of %{name}.
+#This package contains documentation of %{name}.
 
 #files doc
 #doc COPYING README*
