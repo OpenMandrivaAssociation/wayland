@@ -50,6 +50,7 @@ Url:		https://wayland.freedesktop.org/
 Source0:	https://gitlab.freedesktop.org/wayland/wayland/-/releases/%{version}/downloads/%{name}-%{version}.tar.xz
 BuildSystem:	meson
 BuildOption:  -Ddocbook_validation=false
+BuildIotion:  -Ddocumentation=false
 BuildRequires:	docbook-style-xsl
 BuildRequires:	xmlto
 BuildRequires:	doxygen
