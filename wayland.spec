@@ -43,7 +43,7 @@
 Summary:	Wayland Compositor Infrastructure
 Name:		wayland
 Version:	1.25.0
-Release:	1
+Release:	2
 License:	MIT
 Group:		System/Libraries
 Url:		https://wayland.freedesktop.org/
@@ -64,7 +64,7 @@ BuildRequires:	graphviz
 BuildRequires:	devel(libexpat)
 BuildRequires:	devel(libffi)
 BuildRequires:  devel(liblzma)
-BuildRequires:	devel(libxml2)
+BuildRequires:	devel(libxml2) >= 2.15.2
 %endif
 
 %description
