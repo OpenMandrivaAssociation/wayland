@@ -43,7 +43,7 @@
 Summary:	Wayland Compositor Infrastructure
 Name:		wayland
 Version:	1.26.0
-Release:	1
+Release:	2
 License:	MIT
 Group:		System/Libraries
 Url:		https://wayland.freedesktop.org/
@@ -257,6 +257,11 @@ This package contains the libraries for %{egl_name}.
 %prep -a
 # (tpg) skip build tests
 sed -i -e "s/subdir('tests')//g" meson.build
+%if %{cross_compiling}
+# Native wayland-scanner.pc paths are rewritten by PKG_CONFIG_SYSROOT_DIR
+# into the target sysroot, where the binary is missing or the wrong arch.
+sed -i -e "s/find_program(scanner_dep.get_variable(pkgconfig: 'wayland_scanner'))/find_program('wayland-scanner', native: true)/" src/meson.build
+%endif
 
 %install -a
 find %{buildroot} -size 0 -delete
