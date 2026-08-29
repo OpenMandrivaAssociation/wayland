@@ -43,7 +43,7 @@
 Summary:	Wayland Compositor Infrastructure
 Name:		wayland
 Version:	1.26.0
-Release:	2
+Release:	3
 License:	MIT
 Group:		System/Libraries
 Url:		https://wayland.freedesktop.org/
@@ -261,6 +261,9 @@ sed -i -e "s/subdir('tests')//g" meson.build
 # Native wayland-scanner.pc paths are rewritten by PKG_CONFIG_SYSROOT_DIR
 # into the target sysroot, where the binary is missing or the wrong arch.
 sed -i -e "s/find_program(scanner_dep.get_variable(pkgconfig: 'wayland_scanner'))/find_program('wayland-scanner', native: true)/" src/meson.build
+# scanner_dep is unused; dependency() still requires host wayland-scanner.pc
+# which sysroot-only PKG_CONFIG_LIBDIR hides.
+sed -i -e "s/scanner_dep = dependency('wayland-scanner', native: true, version: meson.project_version())/scanner_dep = declare_dependency()/" src/meson.build
 %endif
 
 %install -a
